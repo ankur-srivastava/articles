@@ -1,8 +1,25 @@
 # articles
-Post Articles. A full stack project.
+# Post Articles. 
+
+## A full stack project. This project is built using Node and React.
 
 
 npm packages used : express-validator jsonwebtoken express-jwt formidable lodash slugify string-strip-html mongoose express
+
+
+Clone the repo.
+
+Navigate to backend.
+
+$ cd backend
+$ npm install
+$ npm start
+
+Navigate to frontend.
+
+$ cd frontend
+$ npm install
+$ npm start
 
 
 To Test
