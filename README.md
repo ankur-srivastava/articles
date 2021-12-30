@@ -1,7 +1,6 @@
-# articles
-# Post Articles. 
+# A Blogging Platform
 
-## A full stack project. This project is built using Node and React.
+## This project is built using Node and React.
 
 
 npm packages used : express-validator jsonwebtoken express-jwt formidable lodash slugify string-strip-html mongoose express
