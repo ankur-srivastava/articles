@@ -5,6 +5,7 @@ const cookieParser=require('cookie-parser')
 const cors=require('cors')
 
 const blogRoutes = require('./routes/blog')
+const authRoutes = require('./routes/auth')
 
 require('dotenv').config()
 
@@ -19,6 +20,7 @@ if(process.env.NODE_ENV === 'development'){
 }
 
 app.use('/api', blogRoutes)
+app.use('/api', authRoutes)
 
 const port = process.env.PORT
 
