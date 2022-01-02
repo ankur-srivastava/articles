@@ -13,7 +13,9 @@ Clone the repo.
 Add a .env file in backend with configuration that look like
 
 NODE_ENV=development
+
 PORT=8000
+
 CLIENT_URL=http://localhost:3000
 
 
@@ -42,7 +44,11 @@ POST http://localhost:8000/api/signup
 Sample JSON body to test
 
 {
+
     "name": "Test",
+
     "email": "a@a.com",
+
     "password": "123456"
+
 }
