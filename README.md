@@ -10,6 +10,12 @@ npm packages used : express-validator jsonwebtoken express-jwt formidable lodash
 
 Clone the repo.
 
+Add a .env file in backend with configuration that look like
+
+NODE_ENV=development
+PORT=8000
+CLIENT_URL=http://localhost:3000
+
 
 Navigate to backend.
 
