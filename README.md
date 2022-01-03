@@ -20,20 +20,16 @@ Add a .env file in backend with configuration that look like
 
 Navigate to backend.
 
-$ cd backend
-
-$ npm install
-
-$ npm start
+    $ cd backend
+    $ npm install
+    $ npm start
 
 
 Navigate to frontend.
 
-$ cd frontend
-
-$ npm install
-
-$ npm start
+    $ cd frontend
+    $ npm install
+    $ npm start
 
 
 To Test
@@ -42,12 +38,8 @@ POST http://localhost:8000/api/signup
 
 Sample JSON body to test
 
-{
-
-    "name": "Test",
-
-    "email": "a@a.com",
-
-    "password": "123456"
-
-}
+    {
+        "name": "Test",
+        "email": "a@a.com",
+        "password": "123456"
+    }
