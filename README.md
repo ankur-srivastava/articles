@@ -12,11 +12,10 @@ Clone the repo.
 
 Add a .env file in backend with configuration that look like
 
-NODE_ENV=development
-
-PORT=8000
-
-CLIENT_URL=http://localhost:3000
+    NODE_ENV=development
+    PORT=8000
+    CLIENT_URL=http://localhost:3000
+    MONGO_URL=mongodb+srv://<user>:<pwd>@<mongo_url>/<database_name>?retryWrites=true&w=majority
 
 
 Navigate to backend.
