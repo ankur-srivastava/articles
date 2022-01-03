@@ -1,4 +1,29 @@
+const shortId = require('shortid')
+
+const User = require('../models/user')
+
 exports.signup = (req, res)=>{
     const { name, email, password } = req.body
-    res.json({name, email})
+    User.findOne({email}).exec((error, user) => {
+        if(user) {
+            return res.status(400).json({
+                error: 'Email exists'
+            })
+        }
+        let username = shortId.generate()
+        let profile = `${process.env.CLIENT_URL}/profile/${username}`
+
+        let newUser = new User({name, email, password, profile, username})
+        newUser.save((err, user) => {
+            if(err) {
+                return res.status(400).json({error: err})
+            }
+            // res.json({
+            //     user
+            // })
+            res.json({
+                message: 'Signed up successfully'
+            })
+        })
+    })
 }
