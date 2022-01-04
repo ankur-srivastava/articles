@@ -5,3 +5,8 @@ exports.userSignupValidator = [
     check('email').isEmail().withMessage('Please enter a valid email'),
     check('password').isLength({min: 6}).withMessage('Password must be of atleast 6 characters')
 ]
+
+exports.userLoginValidator = [
+    check('email').isEmail().withMessage('Please enter a valid email'),
+    check('password').isLength({min: 6}).withMessage('Password must be of atleast 6 characters')
+]
