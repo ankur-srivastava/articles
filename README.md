@@ -8,6 +8,12 @@
 npm packages used : express-validator jsonwebtoken express-jwt formidable lodash slugify string-strip-html mongoose express
 
 
+Tech Stack
+
+    frontend : Next : https://nextjs.org/docs/getting-started
+    backend  : Node : https://nodejs.org/en/
+
+
 Clone the repo.
 
 Add a .env file in backend with configuration that look like
@@ -29,7 +35,13 @@ Navigate to frontend.
 
     $ cd frontend
     $ npm install
-    $ npm start
+    $ npm dev build
+
+
+URLs
+
+    frontend - http://localhost:3000/
+    backend  - http://localhost:8000/
 
 
 To Test
