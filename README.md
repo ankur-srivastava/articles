@@ -1,6 +1,6 @@
 # A Blogging Platform
 
-## This project is built using Node and React.
+## This project is built using Node, React and Next.
 
 ### Author : Ankur Srivastava
 
