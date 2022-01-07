@@ -12,6 +12,7 @@ Tech Stack
 
     frontend : Next : https://nextjs.org/docs/getting-started
     backend  : Node : https://nodejs.org/en/
+    bootstrap
 
 
 Clone the repo.
@@ -22,6 +23,16 @@ Add a .env file in backend with configuration that look like
     PORT=8000
     CLIENT_URL=http://localhost:3000
     MONGO_URL=mongodb+srv://<user>:<pwd>@<mongo_url>/<database_name>?retryWrites=true&w=majority
+
+Add a next.config.js file in /frontend. This will have env variables for Next project
+
+    module.exports = {
+        publicRuntimeConfig: {
+            APP_NAME: 'Articles',
+            API_DEV: 'http://localhost:8000/api',
+            PRODUCTION: false
+        }
+    }
 
 
 Navigate to backend.
