@@ -37,6 +37,21 @@ export const login = (user)=>{
     })
 }
 
+// next is the callback function
+export const logout = (next) => {
+    removeCookie('token')
+    removeLocalStorage('user')
+    next()
+
+    return fetch(`${API}/logout`, {
+        method: 'POST'
+    }).then((response)=>{
+        console.log(response)
+    }).catch(err=>{
+        console.error(err)
+    })
+}
+
 // set cookie
 export const setCookie = (key, value)=>{
     // check that next is running on the client side
@@ -56,7 +71,7 @@ export const removeCookie = (key)=>{
 // get cookie
 export const getCookie = (key)=>{
     if(process.browser) {
-        cookie.get(key)
+        return cookie.get(key)
     }
 }
 
