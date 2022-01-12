@@ -1,6 +1,6 @@
 import Router from 'next/router'
-import React, {useState} from 'react'
-import { authenticate, login } from '../../actions/auth'
+import React, {useEffect, useState} from 'react'
+import { authenticate, isAuth, login } from '../../actions/auth'
 
 const LoginComponent = ()=>{
     const [values, setValues] = useState({
@@ -11,6 +11,10 @@ const LoginComponent = ()=>{
         message: '',
         showForm: true
     })
+
+    useEffect(()=>{
+        isAuth() && Router.push('/')
+    }, [])
 
     const { email, password, error, loading, message, showForm } = values
 
