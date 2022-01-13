@@ -44,9 +44,23 @@ const Header = () => {
                     </NavItem>
                   </React.Fragment>
                 ) }
-                { isAuth() && (<NavItem>
-                      <NavLink style={{cursor: 'pointer'}} onClick={() => logout(()=>{ Router.replace('/login') })}>Logout</NavLink>
-                </NavItem>) }
+                { isAuth() && (
+                  <React.Fragment>
+                    <NavItem>
+                        <NavLink style={{cursor: 'pointer'}} onClick={() => {
+                            if(isAuth() && isAuth().role === 1) {
+                              Router.replace('/admin')
+                            } else {
+                              Router.replace('/user')
+                            }
+                          }}>{ `${isAuth().name}` }'s Dashboard</NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink style={{cursor: 'pointer'}} onClick={() => logout(()=>{ Router.replace('/login') })}>Logout</NavLink>
+                    </NavItem>
+                  </React.Fragment>
+                  ) 
+                }
 
               </Nav>
             </Collapse>

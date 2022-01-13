@@ -41,7 +41,11 @@ const LoginComponent = ()=>{
                 setValues({...values, error: data.error, loading: false})
             } else {
                 authenticate(data, ()=>{
-                    Router.push("/")
+                    if(isAuth() && isAuth().role === 1) {
+                        Router.push("/admin")    
+                    } else {
+                        Router.push("/user")
+                    }
                 })
             }
         })
