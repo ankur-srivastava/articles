@@ -13,7 +13,7 @@ router.get('/logout', logout)
 // Test
 router.get('/secret', requireLogin, (req, res)=>{
     res.json({
-        message: 'You have access to secret page'
+        user: req.auth
     })
 })
 

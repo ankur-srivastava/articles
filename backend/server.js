@@ -7,6 +7,7 @@ const mongoose = require('mongoose')
 
 const blogRoutes = require('./routes/blog')
 const authRoutes = require('./routes/auth')
+const userRoutes = require('./routes/user')
 
 require('dotenv').config()
 
@@ -22,6 +23,7 @@ if(process.env.NODE_ENV === 'development'){
 
 app.use('/api', blogRoutes)
 app.use('/api', authRoutes)
+app.use('/api', userRoutes)
 
 mongoose.connect(process.env.MONGO_URL, {useNewUrlParser: true, useUnifiedTopology: true}).then(() => {
     console.log('DB Connected');

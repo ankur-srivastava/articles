@@ -66,3 +66,40 @@ exports.requireLogin = expressJwt({
     algorithms: ["HS256"],
     userProperty: "auth",
 })
+
+exports.authMiddleware = (req, res, next) => {
+    const authUserId = req.auth._id
+    User.findById({_id: authUserId}).exec((error, user) => {
+        if(error || !user) {
+            return res.status(400).json({
+                error: 'User not found'
+            })
+        } else {
+            // Profile will now be available to next method
+            req.profile = user
+            next()
+        }
+    })
+}
+
+exports.adminMiddleware = (req, res, next) => {
+    const adminUserId = req.user._id
+    User.findById({_id: adminUserId}).exec((error, user) => {
+        if(error || !user) {
+            return res.status(400).json({
+                error: 'User not found'
+            })
+        } else {
+
+            if(user.role !== 1) {
+                return res.status(400).json({
+                    error: 'Admin resource. Access denied.'
+                })
+            }
+
+            // Profile will now be available to next method
+            req.profile = user
+            next()
+        }
+    })
+}
