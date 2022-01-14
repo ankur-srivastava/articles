@@ -14,3 +14,40 @@ exports.create = (req, res) => {
         res.json(data)
     })
 }
+
+exports.list = (req, res) => {
+    Category.find({}).exec((error, data)=>{
+        if(error) {
+            res.status(400).exec({
+                error: errorHandler(error)
+            })
+        }
+        res.json(data)
+    })
+}
+
+exports.read = (req, res) => {
+    const slug = req.params.slug.toLowerCase()
+    Category.findOne({slug}).exec((err, data) =>{
+        if(err) {
+            res.status(400).json({
+                error: errorHandler(err)
+            })
+        }
+        res.json(data)
+    })
+}
+
+exports.remove = (req, res) => {
+    const slug = req.params.slug.toLowerCase()
+    Category.findOneAndRemove({slug}).exec((err, data) =>{
+        if(err) {
+            res.status(400).json({
+                error: errorHandler(err)
+            })
+        }
+        res.json({
+            message: 'Category deleted successfully'
+        })
+    })
+}
