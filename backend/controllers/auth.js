@@ -83,7 +83,7 @@ exports.authMiddleware = (req, res, next) => {
 }
 
 exports.adminMiddleware = (req, res, next) => {
-    const adminUserId = req.user._id
+    const adminUserId = req.auth._id
     User.findById({_id: adminUserId}).exec((error, user) => {
         if(error || !user) {
             return res.status(400).json({
