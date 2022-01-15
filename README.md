@@ -5,7 +5,18 @@
 ### Author : Ankur Srivastava
 
 
-npm packages used : express-validator jsonwebtoken express-jwt formidable lodash slugify string-strip-html mongoose express
+npm packages used : 
+    express-validator 
+    jsonwebtoken 
+    express-jwt 
+    formidable 
+    lodash 
+    slugify 
+    string-strip-html 
+    mongoose 
+    express
+    nprogress : Progree Bar
+    @zeit/next-css
 
 
 Tech Stack
