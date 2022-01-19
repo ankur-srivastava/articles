@@ -13,7 +13,10 @@ function AdminIndex() {
                 <ul className="list-group">
                     <li className="list-group-item">
                         <Link href="/admin/crud/category-tag">
-                            <a>Create Category</a>
+                            <a className="text-center m-2 p-2">Create Category</a>
+                        </Link>
+                        <Link href="/admin/crud/category-tag">
+                            <a className="text-center m-2 p-2">Create Tag</a>
                         </Link>
                     </li>
                 </ul>
