@@ -25,6 +25,15 @@ Tech Stack
     backend  : Node : https://nodejs.org/en/
     bootstrap
 
+Approach
+
+For adding a feature like Category, which needs CRUD operations via API
+
+    1. Add schema
+    2. Add routes / APIs : CRUD operations
+    3. Add to server.js
+    4. Create UI to enable users to perform CRUD
+
 
 Clone the repo.
 
@@ -77,3 +86,7 @@ Sample JSON body to test
         "email": "a@a.com",
         "password": "123456"
     }
+
+Notes
+
+I have used an older version of string-strip-html. The new one requires import to be used.
