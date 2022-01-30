@@ -18,6 +18,9 @@ function AdminIndex() {
                         <Link href="/admin/crud/category-tag">
                             <a className="text-center m-2 p-2">Create Tag</a>
                         </Link>
+                        <Link href="/admin/crud/blog">
+                            <a className="text-center m-2 p-2">Create Blog</a>
+                        </Link>
                     </li>
                 </ul>
                 </div>

@@ -5,7 +5,7 @@
 ### Author : Ankur Srivastava
 
 
-npm packages used : 
+npm packages used
     express-validator 
     jsonwebtoken 
     express-jwt 
@@ -17,6 +17,7 @@ npm packages used :
     express
     nprogress : Progree Bar
     @zeit/next-css
+    react quill editor
 
 
 Tech Stack

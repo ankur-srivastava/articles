@@ -11,6 +11,7 @@ const { smartTrim } = require('../helpers/blog')
 
 exports.create = (req, res)=>{
     // since we are handling form data
+    console.log('Publish Blog request received')
     let form = new formidable.IncomingForm()
     form.keepExtensions = true
     form.parse(req, (err, fields, files)=>{
@@ -19,6 +20,7 @@ exports.create = (req, res)=>{
                 error: err
             })
         }
+
         const { title, body, categories, tags } = fields
 
         // validation
@@ -55,15 +57,20 @@ exports.create = (req, res)=>{
             mdesc: stripHtml(body.substring(0, 160)),
             postedBy: req.auth._id
         })
-        // Check if photo is > 1MB
-        if(files.photo.size > 1000000) {
-            return res.status(400).json({
-                error: 'Please upload a photo with size less than 1MB'
-            })
-        }
 
-        blog.photo.data = fs.readFileSync(files.photo.filepath)
-        blog.photo.contentType = files.photo.mimetype
+        // Check if photo is > 1MB
+        if(files.photo) {
+            if(files.photo.size > 1000000) {
+                return res.status(400).json({
+                    error: 'Please upload a photo with size less than 1MB'
+                })
+            } else {
+                console.log('Photo 1')
+                blog.photo.data = fs.readFileSync(files.photo.filepath)
+                blog.photo.contentType = files.photo.mimetype
+                console.log('Photo 2')
+            }
+        }
 
         // array of categories and tags
         let categoriesArray = categories && categories.split(',')
@@ -71,6 +78,7 @@ exports.create = (req, res)=>{
 
         blog.save((err, response) => {
             if(err) {
+                console.error(`Got error while saving blog ${err}`)
                 return res.status(400).json({
                     error: errorHandler(err)
                 })
