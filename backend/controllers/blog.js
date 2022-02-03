@@ -65,10 +65,8 @@ exports.create = (req, res)=>{
                     error: 'Please upload a photo with size less than 1MB'
                 })
             } else {
-                console.log('Photo 1')
                 blog.photo.data = fs.readFileSync(files.photo.filepath)
                 blog.photo.contentType = files.photo.mimetype
-                console.log('Photo 2')
             }
         }
 
@@ -102,6 +100,157 @@ exports.create = (req, res)=>{
                     }
                 }
             )
+        })
+    })
+}
+
+// list, read, create, listBlogsCategoriesTags, remove, update
+
+// To get categories corresponding to categoryId in a blog, and similarly tag we can use populate
+exports.list = (req, res) => {
+    Blog.find({})
+        .populate('categories', '_id name slug')
+        .populate('tags', '_id name slug')
+        .populate('postedBy', '_id name username')
+        .select('_id title slug excerpt categories tags postedBy createdBy createdAt updatedAt')
+        .exec((error, data) => {
+            if(error) {
+                return res.json({error: errorHandler(error)})
+            }
+            res.json(data)
+        })
+}
+
+exports.read = (req, res) => {
+    const slug = req.params.slug.toLowerCase()
+    Blog.findOne({slug})
+        .populate('categories', '_id name slug')
+        .populate('tags', '_id name slug')
+        .populate('postedBy', '_id name username')
+        .select('_id title body slug mtitle mdesc excerpt categories tags postedBy createdBy createdAt updatedAt')
+        .exec((err, data) => {
+            if(err) {
+                return res.json({error: errorHandler(err)})
+            }
+            res.json(data)
+        })
+}
+
+exports.listBlogsCategoriesTags = (req, res) => {
+    let limit = req.body.limit ? parseInt(req.body.limit) : 10
+    let skip = req.body.skip ? parseInt(req.body.skip) : 0
+
+    let blogs
+    let categories
+    let tags
+
+    Blog.find({})
+        .populate('categories', '_id name slug')
+        .populate('tags', '_id name slug')
+        .populate('postedBy', '_id name username')
+        .select('_id title slug excerpt categories tags postedBy createdBy createdAt updatedAt')
+        .sort({createdAt: -1})
+        .skip(skip)
+        .limit(limit)
+        .exec((error, data) => {
+            if(error) {
+                return res.json({error: errorHandler(error)})
+            }
+            blogs = data
+            // categories
+            Category.find({}).exec((err, c) => {
+                if(err) {
+                    return res.json({
+                        error: errorHandler(err)
+                    })
+                }
+                categories = c
+                // Get tags
+                Tag.find({}).exec((err, t)=>{
+                    if(err) {
+                        return res.json({
+                            error: errorHandler(err)
+                        })
+                    }
+                    tags = t
+                    res.json({blogs, categories, tags, size: blogs.length})
+                })
+            })
+        })
+}
+
+exports.remove = (req, res) => {
+    const slug = req.params.slug.toLowerCase()
+    Blog.findOneAndRemove({slug}).exec((err, data)=>{
+        if(err) {
+            return res.json({error: errorHandler(err)})
+        }
+        res.json({
+            message: 'Blog deleted successfully'
+        })
+    })
+}
+
+exports.update = (req, res)=>{
+    console.log('Update request received')
+    const slug = req.params.slug.toLowerCase()
+    Blog.findOne({slug}).exec((err, oldBlog) => {
+        if(err) {
+            return res.status(400).json({
+                error: errorHandler(err)
+            })
+        }
+        let form = new formidable.IncomingForm()
+        form.keepExtensions = true
+        form.parse(req, (err, fields, files)=>{
+            if(err) {
+                return res.status(400).json({
+                    error: err
+                })
+            }
+    
+            // we will use lodash to merge the new changes
+            // we will keep the old slug
+            const slugBeforeMerge = oldBlog.slug
+            oldBlog = _.merge(oldBlog, fields)
+            oldBlog.slug = slugBeforeMerge
+
+            const { body, categories, tags } = fields
+
+            if(body) {
+                oldBlog.excerpt = smartTrim(body, 320, ' ', ' ...')
+                oldBlog.mdesc = stripHtml(body.substring(0, 160))
+            }
+    
+            if(categories) {
+                oldBlog.categories = categories.split(',')
+            }
+
+            if(tags) {
+                oldBlog.tags = tags.split(',')
+            }
+    
+            // Check if photo is > 1MB
+            if(files.photo) {
+                if(files.photo.size > 1000000) {
+                    return res.status(400).json({
+                        error: 'Please upload a photo with size less than 1MB'
+                    })
+                } else {
+                    oldBlog.photo.data = fs.readFileSync(files.photo.filepath)
+                    oldBlog.photo.contentType = files.photo.mimetype
+                }
+            }
+    
+            oldBlog.save((err, response) => {
+                if(err) {
+                    console.error(`Got error while saving blog ${err}`)
+                    return res.status(400).json({
+                        error: errorHandler(err)
+                    })
+                }
+                res.json(response)
+            })
         })
     })
 }
