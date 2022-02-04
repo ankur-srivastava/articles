@@ -249,8 +249,25 @@ exports.update = (req, res)=>{
                         error: errorHandler(err)
                     })
                 }
+                // If we dont want to return the photo
+                // response.photo = undefined
                 res.json(response)
             })
         })
+    })
+}
+
+exports.getPhoto = (req, res) => {
+    const slug = req.params.slug
+    Blog.findOne({slug})
+    .select('photo')
+    .exec((err, blog) => {
+        if(err || !blog) {
+            return res.status(400).json({
+                error: errorHandler(err)
+            })
+        }
+        res.set('Content-Type', blog.photo.contentType)
+        res.status(200).send(blog.photo.data)
     })
 }
