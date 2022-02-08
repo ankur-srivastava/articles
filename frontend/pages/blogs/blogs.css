@@ -1,0 +1,9 @@
+.a {
+    text-decoration: none;
+}
+
+#blogTitle {
+    padding-top: 3;
+    padding-bottom: 3;
+    font-weight: bold;
+}

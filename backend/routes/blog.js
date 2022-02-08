@@ -9,7 +9,7 @@ router.get('/blog/photo/:slug', getPhoto)
 
 router.post('/blog', requireLogin, adminMiddleware, create)
 // This is a GET request, but we may have to send additional data to load more, in body
-router.post('/blogs-cetegories-tags', listBlogsCategoriesTags)
+router.post('/blogs-categories-tags', listBlogsCategoriesTags)
 
 router.delete('/blog/:slug', requireLogin, adminMiddleware, remove)
 router.put('/blog/:slug', requireLogin, adminMiddleware, update)
