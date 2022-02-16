@@ -1,27 +1,27 @@
-import React from 'react'
 import Layout from '../../components/Layout'
 import { listBlogsWithCategoriesAndTags } from '../../actions/blog'
 import BlogCard from '../../components/blog/BlogCard'
 import Link from 'next/link'
 import Head from 'next/head'
 import { withRouter } from 'next/router'
-import { API, DOMAIN, APP_NAME, FACEBOOK_APP_ID } from '../../config'
+import { DOMAIN, APP_NAME, FACEBOOK_APP_ID } from '../../config'
+import React from 'react'
 
 const Blogs = ({blogs, categories, tags, size, router}) => {
     const head = () => (
         <Head>
             <title>Programming Blog | {APP_NAME}</title>
-            <meta name='description' content='Programming Tutorials'/>
+            <meta name='description' content='Programming Tutorials on Android, Javascript, Python'/>
             <link rel="canonical" href={`${DOMAIN}${router.pathname}`} />
-            <meta property='og:title' content={`Latest Tutorials | ${APP_NAME}`}/>
-            <meta property='og:description' content='Programming Tutorials'/>
-            <meta property='og:type' content='website'/>
-            <meta property='og:url' content={`${DOMAIN}${router.pathname}`}/>
-            <meta property='og:site_name' content={`${APP_NAME}`}/>
-            <meta property='og:image' content={`${DOMAIN}/static/sample.jpeg`}/>
-            <meta property='og:image:secure_url' content={`${DOMAIN}/static/sample.jpeg`}/>
-            <meta property='og:image:type' content='image/jpeg'/>
-            <meta property='fb:app_id' content={`${FACEBOOK_APP_ID}`}/>
+            <meta property='og:title' content={`Latest web development tutorials | ${APP_NAME}`}/>
+            <meta property='og:description' content='Programming Tutorials on Android, Javascript, Python'/>
+            <meta property='og:type' content='website' />
+            <meta property='og:url' content={`${DOMAIN}${router.pathname}`} />
+            <meta property='og:site_name' content={`${APP_NAME}`} />
+            <meta property='og:image' content={`${DOMAIN}/static/sample.jpeg`} />
+            <meta property='og:image:secure_url' content={`${DOMAIN}/static/sample.jpeg`} />
+            <meta property='og:image:type' content="image/jpeg" />
+            <meta property='fb:app_id' content={`${FACEBOOK_APP_ID}`} />
         </Head>
     )
     const showAllBlogs = () => {
